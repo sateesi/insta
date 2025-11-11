@@ -26,7 +26,8 @@ This repository contains a minimal Instagram-like proof of concept built with a 
 3. Visit the services:
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:4000
-   - MinIO console: http://localhost:9001 (login with `MINIO_ROOT_USER` / `MINIO_ROOT_PASSWORD`)
+   - MinIO console: http://localhost:9101 (login with `MINIO_ROOT_USER` / `MINIO_ROOT_PASSWORD`)
+   - MinIO bucket endpoint (public): http://localhost:9100
 
 ### Seeding Data
 
@@ -68,7 +69,7 @@ curl -X POST http://localhost:4000/api/posts \
 
 - The backend uses `express-validator` for request validation and `jsonwebtoken` for auth.
 - TypeORM is configured in development mode with `synchronize: true` for simplicity. For production, use migrations under `backend/src/migrations/`.
-- MinIO buckets are created at startup and set to public-read. Adjust `MINIO_PUBLIC_URL` in `.env` if you change ports/hostnames, and extend `backend/src/services/storageService.ts` for presigned URLs, CDN integration, or signed download URLs.
+- MinIO buckets are created at startup and set to public-read. Adjust `MINIO_PUBLIC_URL` in `.env` (default `http://localhost:9100`) if you change ports/hostnames, and extend `backend/src/services/storageService.ts` for presigned URLs, CDN integration, or signed download URLs.
 - Worker logs are available via `docker compose logs -f worker`.
 
 ### Testing

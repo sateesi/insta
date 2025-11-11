@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt, { SignOptions, Secret } from "jsonwebtoken";
 import { AppDataSource } from "../config/data-source";
 import { config } from "../config/env";
 import { User } from "../entities/User";
@@ -45,13 +45,21 @@ export const loginUser = async (email: string, password: string): Promise<AuthRe
 };
 
 const buildAuthResponse = (user: User): AuthResponse => {
-  const token = jwt.sign({ userId: user.id, email: user.email }, config.jwtSecret, {
-    expiresIn: config.jwtExpiresIn
-  });
+  const token = jwt.sign(
+    { userId: user.id, email: user.email },
+    config.jwtSecret as Secret,
+    {
+      expiresIn: config.jwtExpiresIn as SignOptions["expiresIn"]
+    }
+  );
 
-  const refreshToken = jwt.sign({ userId: user.id, email: user.email }, config.refreshSecret, {
-    expiresIn: config.refreshExpiresIn
-  });
+  const refreshToken = jwt.sign(
+    { userId: user.id, email: user.email },
+    config.refreshSecret as Secret,
+    {
+      expiresIn: config.refreshExpiresIn as SignOptions["expiresIn"]
+    }
+  );
 
   return {
     token,
