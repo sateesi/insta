@@ -33,6 +33,7 @@ services:
   backend:
     build:
       context: ./backend
+      target: dev
     depends_on:
       - postgres
       - redis
@@ -51,6 +52,7 @@ services:
   worker:
     build:
       context: ./worker
+      target: dev
     depends_on:
       - backend
       - redis
@@ -67,6 +69,7 @@ services:
   frontend:
     build:
       context: ./frontend
+      target: dev
     depends_on:
       - backend
     env_file:
