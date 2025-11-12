@@ -47,7 +47,7 @@ services:
     volumes:
       - ./backend:/usr/src/app
       - backend_node_modules:/usr/src/app/node_modules
-    command: sh -c "npm run seed && npm run dev"
+    command: sh -c "npm run seed; exec npm run dev"
 
   worker:
     build:

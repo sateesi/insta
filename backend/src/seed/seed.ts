@@ -85,8 +85,12 @@ async function seed() {
   await AppDataSource.destroy();
 }
 
-seed().catch((error) => {
-  console.error("Seed failed", error);
-  process.exit(1);
-});
+seed()
+  .then(() => {
+    process.exit(0);
+  })
+  .catch((error) => {
+    console.error("Seed failed", error);
+    process.exit(1);
+  });
 
